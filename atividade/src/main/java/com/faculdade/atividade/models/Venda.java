@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Vendedor implements Serializable{
+public class Venda implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -17,13 +17,10 @@ public class Vendedor implements Serializable{
     private Long id;
 
     @Column(nullable = false, unique = false)
-    private String name;
+    private double value;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-    
     @Column(nullable = false, unique = false)
-    private String password;
+    private boolean in_person;
 
     public Long getId() {
         return id;
@@ -33,28 +30,20 @@ public class Vendedor implements Serializable{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public double getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(double value) {
+        this.value = value;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isIn_person() {
+        return in_person;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setIn_person(boolean in_person) {
+        this.in_person = in_person;
     }
 
     
