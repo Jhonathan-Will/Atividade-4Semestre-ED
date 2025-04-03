@@ -1,5 +1,6 @@
 package com.faculdade.atividade.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -32,6 +33,11 @@ public class VendedorService {
     @Transactional
     public Optional<Vendedor> getSeller(Long id){
         return vendedorRepository.findById(id);
+    }
+
+    @Transactional
+    public List<Vendedor> getAll(){
+        return vendedorRepository.findAll();
     }
 
 }
