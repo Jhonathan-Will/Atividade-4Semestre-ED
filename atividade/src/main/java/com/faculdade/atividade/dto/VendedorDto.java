@@ -1,8 +1,14 @@
 package com.faculdade.atividade.dto;
 
-public record VendedorDto(Long id,
-                          String name,
-                          String email,
-                          String password  ) {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-}
+public record VendedorDto(
+    @NotBlank(message = "Name is required")        String name,
+
+    @Email(message = "Invalid Email")  
+    @NotBlank(message = "Email is required")      String email,
+
+    @NotBlank(message = "Password is required") 
+    @Size(min = 6)                              String password  ) {}
