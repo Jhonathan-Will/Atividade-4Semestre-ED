@@ -28,17 +28,17 @@ public class Vendedor implements Serializable{
     @Column(nullable = false, unique = false)
     private String name;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false, unique = true)
     private String email;
     
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false, unique = false)
     private String password;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Venda> sells = new HashSet<>();
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Ponto> points = new HashSet<>();
 
