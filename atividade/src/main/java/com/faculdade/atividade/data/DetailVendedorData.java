@@ -2,7 +2,6 @@ package com.faculdade.atividade.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +10,9 @@ import com.faculdade.atividade.models.Vendedor;
 
 public class DetailVendedorData implements UserDetails{
 
-    private final Optional<Vendedor> vendedor;
+    private final Vendedor vendedor;
 
-    public DetailVendedorData(Optional<Vendedor> vendedor) {
+    public DetailVendedorData(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
 
@@ -24,16 +23,35 @@ public class DetailVendedorData implements UserDetails{
 
     @Override
     public String getPassword() {
-       return vendedor.orElse(new Vendedor()).getPassword();
+       return vendedor.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return vendedor.orElse(new Vendedor()).getName();
+        return vendedor.getName();
     }
 
     public String getEmail() {
-        return vendedor.orElse(new Vendedor()).getEmail();
+        return vendedor.getEmail();
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
