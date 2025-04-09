@@ -3,12 +3,12 @@ package com.faculdade.atividade.services.details;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.faculdade.atividade.data.DetailVendedorData;
 import com.faculdade.atividade.repository.VendedorRepository;
 
-@Component
+@Service
 public class DetailsVendedorServiceImpl implements UserDetailsService{
 
     private final VendedorRepository vendedorRepository;

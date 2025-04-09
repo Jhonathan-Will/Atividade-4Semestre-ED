@@ -81,7 +81,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(
-            auth -> auth.requestMatchers("/authenticate").permitAll()
+            auth -> auth.requestMatchers("/auth/**").permitAll()
             .anyRequest().authenticated())
             .httpBasic(Customizer.withDefaults())
             .oauth2ResourceServer(
@@ -100,11 +100,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public  JwtEncoder JwtEncoder() {
+    JwtEncoder jwtEncoder() {
         try {
-            RSAPrivateKey priv = privateKey();
-            RSAPublicKey key = publicKey();
-            RSAKey jwt = new RSAKey.Builder(key).privateKey(priv).build();
+            RSAKey jwt = new RSAKey.Builder(publicKey()).privateKey(privateKey()).build();
 
             return new NimbusJwtEncoder(new ImmutableJWKSet<>(new JWKSet(jwt)));
         } catch (Exception e) {

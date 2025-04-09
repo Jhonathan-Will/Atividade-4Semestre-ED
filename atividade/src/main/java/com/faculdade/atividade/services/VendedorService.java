@@ -36,6 +36,11 @@ public class VendedorService {
     }
 
     @Transactional
+    public Optional<Vendedor> getSellerByEmail(String email){
+        return vendedorRepository.findByEmail(email);
+    }
+
+    @Transactional
     public List<Vendedor> getAll(){
         return vendedorRepository.findAll();
     }
