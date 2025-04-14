@@ -36,10 +36,10 @@ public class Vendedor implements Serializable{
     @Column(nullable = false, unique = false)
     private String password;
 
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Venda> sells = new HashSet<>();
 
-    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "seller", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Ponto> points = new HashSet<>();
 
     public Long getId() {
@@ -72,6 +72,12 @@ public class Vendedor implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Vendedor [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", sells="
+                + sells + ", points=" + points + "]";
     }
 
     

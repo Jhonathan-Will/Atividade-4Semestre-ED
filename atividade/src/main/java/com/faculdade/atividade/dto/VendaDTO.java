@@ -1,18 +1,15 @@
 package com.faculdade.atividade.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 
 public record VendaDTO(
-   @NotBlank(message = "Specify if sell was made in person or not") 
-   @NotNull(message = "Specify if sell was made in person or not") boolean in_person,
+   @NotNull(message = "Specify if sell was made in person or not") Boolean in_person,
     
-   @NotBlank(message = "Confirm the value of this sell") 
-   @NotEmpty(message = "Sell dont have value") float value,
-    
-   @NotEmpty(message = "Sell dont delivery who did") 
-   @NotBlank(message = "Dont have confimation that who did this sell") Long id_seller
+   @NotNull(message = "Confirm the value of this sell")
+   @Positive(message = "Sell value must be greater than 0") Float value
+
 ) {
 
 }

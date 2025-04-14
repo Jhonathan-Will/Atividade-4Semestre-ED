@@ -45,4 +45,9 @@ public class VendedorService {
         return vendedorRepository.findAll();
     }
 
+    public boolean isSeller(String authenticatedUserEmail) {
+        Optional<Vendedor> seller = vendedorRepository.findByEmail(authenticatedUserEmail);
+        return seller.isPresent();
+    }
+
 }
