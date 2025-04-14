@@ -26,7 +26,7 @@ public class VendaService {
         Venda venda = new Venda();
         venda.setIn_person(request.in_person());
         venda.setValue(request.value());
-        venda.setId_seller(seller.getId());
+        venda.setSeller(seller);
         return vendaRepository.save(venda);
     }
 

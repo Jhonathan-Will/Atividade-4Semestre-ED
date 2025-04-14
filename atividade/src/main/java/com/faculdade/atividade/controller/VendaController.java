@@ -13,11 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,19 +27,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class VendaController {
 
     private VendaService vendaService;
-    private VendedorService vendedorService;
 
     public VendaController(VendaService vendaService, VendedorService vendedorService) {
         this.vendaService = vendaService;
-        this.vendedorService = vendedorService;
     }
 
     @PostMapping
-    public ResponseEntity<?> saveSell(@RequestBody @Valid VendaDTO request, Authentication authentication) {
-        String authenticatedUserEmail = authentication.getName();
-        Optional<Vendedor> seller = vendedorService.getSellerByEmail(authenticatedUserEmail);
+    public ResponseEntity<?> saveSell(@RequestBody @Valid VendaDTO sell, HttpServletRequest request) {
+        Vendedor seller = (Vendedor) request.getAttribute("seller");
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(vendaService.save(request, seller.get()));
+        System.out.println("\n\n\n\n\n\n\n\n Seller: "+ seller.toString());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(vendaService.save(sell, seller));
     }
 
     @GetMapping

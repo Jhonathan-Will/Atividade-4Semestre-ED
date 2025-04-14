@@ -60,8 +60,21 @@ public class Venda implements Serializable{
         this.in_person = in_person;
     }
 
-    public void setId_seller(Long id_seller) {
-        this.seller.setId(id_seller);
+    public Vendedor getSeller() {
+        return seller;
     }
 
+    public void setSeller(Vendedor seller) {
+        this.seller = seller;
+    }
+
+    public Ponto getPoint() {
+        return point;
+    }
+
+    public void setPoint(Ponto point) {
+        this.point = point;
+    }
+
+        
 }

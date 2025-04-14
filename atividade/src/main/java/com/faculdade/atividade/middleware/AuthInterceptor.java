@@ -43,8 +43,12 @@ public class AuthInterceptor implements HandlerInterceptor{
 
             Optional<Vendedor> seller = vendedorService.getSellerByEmail((String) token.get("email"));
 
+            if (seller.isEmpty()) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return false;
+            }
+
             request.setAttribute("seller", seller.get());
-            System.out.println("\n\n\n\n\n\n\n\n Seller: "+ vendedorService.getSellerByEmail((String) token.get("email")) + "\n\n\n\n\n\n\n\n");
             return true;
         
     }
