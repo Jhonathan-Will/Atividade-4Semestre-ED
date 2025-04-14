@@ -17,7 +17,6 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -31,30 +30,24 @@ public class VendaController {
     public VendaController(VendaService vendaService, VendedorService vendedorService) {
         this.vendaService = vendaService;
     }
-
+    
     @PostMapping
     public ResponseEntity<?> saveSell(@RequestBody @Valid VendaDTO sell, HttpServletRequest request) {
         Vendedor seller = (Vendedor) request.getAttribute("seller");
-
-        System.out.println("\n\n\n\n\n\n\n\n Seller: "+ seller.toString());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(vendaService.save(sell, seller));
     }
 
     @GetMapping
-    public ResponseEntity<List<Venda>> getAllSells() {
+    public ResponseEntity<?> getAllSells() {
         return ResponseEntity.status(HttpStatus.OK).body(vendaService.getAllSells());
     }
     
-    @GetMapping("/seller/{id}")
-    public ResponseEntity<List<Venda>> getAllSellsBySellerId(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(vendaService.getSellBySellerId(id));
+    @GetMapping("/seller")
+    public ResponseEntity<List<Venda>> getAllSellsBySellerId(HttpServletRequest request) {
+        Vendedor seller = (Vendedor) request.getAttribute("seller");
+
+        return ResponseEntity.status(HttpStatus.OK).body(vendaService.getSellBySellerId(seller.getId()));
     }
-
-    @GetMapping("/me")
-    public ResponseEntity<?> teste(HttpServletRequest request, VendaDTO venda){
-
-        return ResponseEntity.ok("Seller: "+ request.getAttribute("seller"));
-    } 
 
 }
