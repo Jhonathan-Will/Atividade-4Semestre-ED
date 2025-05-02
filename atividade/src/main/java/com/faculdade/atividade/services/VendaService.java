@@ -45,21 +45,30 @@ public class VendaService {
         return vendaRepository.findSellerNameBySellsWithoutPoints();
     }
 
-    @Transactional 
-    public List<String> getSellsRangeByValueWithSellerName(){
+    @Transactional
+    public List<String> getSellsRangeByValueWithSellerName() {
         List<String> sells = vendaRepository.findSellsRangeByValueWithSellerName();
-        String MaxValue = null;
 
-        for (int i = 0; i < (sells.size() -1); i++){
-            for(int o = i + 1; o < sells.size(); o++){
-                if (sells.get(i).compareTo(sells.get(o)) < 0){
-                    MaxValue = sells.get(i);
-                    sells.set(i, sells.get(o));
-                    sells.set(o, MaxValue);
-                }
-            }
-        }
+        // Ordena a lista com base no valor numérico (em ordem decrescente)
+        sells.sort((s1, s2) -> {
+            Double value1 = Double.parseDouble(s1.split(",")[1].trim());
+            Double value2 = Double.parseDouble(s2.split(",")[1].trim());
+            return value2.compareTo(value1); // Ordem decrescente
+        });
 
+        return sells;
+    }
+
+    @Transactional
+    public List<String> getSellsInPersonRangeByValueWithSellerName() {
+        List<String> sells = vendaRepository.findSellsInPersonRangeByValueWithSellerName();
+
+        // Ordena a lista com base no valor numérico (em ordem decrescente)
+        sells.sort((s1, s2) -> {
+            Double value1 = Double.parseDouble(s1.split(",")[1].trim());
+            Double value2 = Double.parseDouble(s2.split(",")[1].trim());
+            return value2.compareTo(value1); // Ordem decrescente
+        });
 
         return sells;
     }

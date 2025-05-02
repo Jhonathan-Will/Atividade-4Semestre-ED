@@ -22,4 +22,7 @@ public interface VendaRepository extends JpaRepository<Venda, Long>{
 
     @Query("SELECT v.seller.name, v.value FROM Venda v LEFT JOIN Ponto p ON p.sell = v WHERE p.id is NULL")
     List<String> findSellsRangeByValueWithSellerName();
+
+    @Query("SELECT v.seller.name, v.value FROM Venda v LEFT JOIN Ponto p ON p.sell = v WHERE p.id is NULL AND v.in_person = true")
+    List<String> findSellsInPersonRangeByValueWithSellerName();
 }

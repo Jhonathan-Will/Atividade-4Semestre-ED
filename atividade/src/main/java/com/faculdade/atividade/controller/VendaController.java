@@ -60,4 +60,10 @@ public class VendaController {
         List<String> sells = vendaService.getSellsRangeByValueWithSellerName();
         return ResponseEntity.status(HttpStatus.OK).body(sells);
     }
+
+    @GetMapping("/nopoints/seller/range/inperson")
+    public ResponseEntity<List<String>> getSellsInPersonRangeByValueWithSellerName(){
+        List<String> sells = vendaService.getSellsInPersonRangeByValueWithSellerName();
+        return ResponseEntity.status(HttpStatus.OK).body(sells);
+    }
 }
