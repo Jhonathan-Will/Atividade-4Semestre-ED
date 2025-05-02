@@ -46,8 +46,12 @@ public class VendaController {
     @GetMapping("/seller")
     public ResponseEntity<List<Venda>> getAllSellsBySellerId(HttpServletRequest request) {
         Vendedor seller = (Vendedor) request.getAttribute("seller");
-
         return ResponseEntity.status(HttpStatus.OK).body(vendaService.getSellBySellerId(seller.getId()));
-    }
+    }  
 
+    @GetMapping("/nopoints/seller/name")
+    public ResponseEntity<List<String>> getSellerNameBySellsWithoutPoints(){
+        List<String> sells = vendaService.getSellerNameBySellsWithoutPoints();
+        return ResponseEntity.status(HttpStatus.OK).body(sells);
+    }
 }

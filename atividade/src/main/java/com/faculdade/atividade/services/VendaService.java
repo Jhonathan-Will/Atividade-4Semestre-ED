@@ -39,4 +39,9 @@ public class VendaService {
     public List<Venda> getSellBySellerId(Long id) {
         return vendaRepository.findBySellerId(id);
     }
+
+    @Transactional
+    public List<String> getSellerNameBySellsWithoutPoints() {
+        return vendaRepository.findSellerNameBySellsWithoutPoints();
+    }
 }
