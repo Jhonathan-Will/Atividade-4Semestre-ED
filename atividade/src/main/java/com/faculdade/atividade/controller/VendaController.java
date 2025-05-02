@@ -54,4 +54,10 @@ public class VendaController {
         List<String> sells = vendaService.getSellerNameBySellsWithoutPoints();
         return ResponseEntity.status(HttpStatus.OK).body(sells);
     }
+
+    @GetMapping("/nopoints/seller/range")
+    public ResponseEntity<List<String>> getSellsRangeByValueWithSellerName(){
+        List<String> sells = vendaService.getSellsRangeByValueWithSellerName();
+        return ResponseEntity.status(HttpStatus.OK).body(sells);
+    }
 }

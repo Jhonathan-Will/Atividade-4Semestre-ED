@@ -44,4 +44,23 @@ public class VendaService {
     public List<String> getSellerNameBySellsWithoutPoints() {
         return vendaRepository.findSellerNameBySellsWithoutPoints();
     }
+
+    @Transactional 
+    public List<String> getSellsRangeByValueWithSellerName(){
+        List<String> sells = vendaRepository.findSellsRangeByValueWithSellerName();
+        String MaxValue = null;
+
+        for (int i = 0; i < (sells.size() -1); i++){
+            for(int o = i + 1; o < sells.size(); o++){
+                if (sells.get(i).compareTo(sells.get(o)) < 0){
+                    MaxValue = sells.get(i);
+                    sells.set(i, sells.get(o));
+                    sells.set(o, MaxValue);
+                }
+            }
+        }
+
+
+        return sells;
+    }
 }
