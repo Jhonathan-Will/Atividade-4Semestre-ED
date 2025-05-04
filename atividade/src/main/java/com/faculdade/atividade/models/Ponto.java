@@ -53,5 +53,21 @@ public class Ponto implements Serializable{
         this.point = point;
     }
 
+    public Vendedor getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Vendedor seller) {
+        this.seller = seller;
+    }
+
+    public Venda getSell() {
+        return sell;
+    }
+
+    public void setSell(Venda sell) {
+        this.sell = sell;
+    }
+
     
 }
